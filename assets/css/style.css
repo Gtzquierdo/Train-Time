@@ -1,7 +1,12 @@
 
 .jumbotron {
-    background-color: brown;
-    color: aliceblue;
+    background-color: greenyellow;
+    color: black;
+    /* background-image: url("https://media.giphy.com/media/M1gf4DBhCWgeI/giphy.gif"); 
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-attachment: fixed;
+    background-size: auto; */
 
 }
 

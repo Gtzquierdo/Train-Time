@@ -33,7 +33,7 @@ firebase.initializeApp(config);
   // Capture User Button
   $("#newTrainForm").on("submit", function(event) {
 
-    event.preventDefault();
+    
 
     // Grab values from text Boxes
     trainName = $("#trainName").val().trim();
@@ -53,24 +53,37 @@ firebase.initializeApp(config);
       destination: destination,
       firstTrain: firstTrain,
       freq: freq,
+      // nextArr: nextArr,
+      // minAway: minAway,
       dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
+    // Clear input area
+    $("#trainName").val("");
+    $("#destination").val("");
+    $("#firstTrain").val("");
+    $("#frequency").val("");
 
 
 
+    event.preventDefault();
   });
 
   database.ref().on("child_added", function(childSnapshot) {
 
-    var updaTrainName = childSnapshot.val().trainName;
-    var updaDestination = childSnapshot.val().destination;
-    var updaFirstTrain = childSnapshot.val().firstTrain;
-    var updaFreq = childSnapshot.val().freq;
-    var $row = $('<tr></tr>').appendTo('#all-display');
+    updaTrainName = childSnapshot.val().trainName;
+    updaDestination = childSnapshot.val().destination;
+    updaFirstTrain = childSnapshot.val().firstTrain;
+    updaFreq = childSnapshot.val().freq;
 
+    // 
+    // updaNextArr = childSnapshot.val().nextArr;
+    // updaMinAway = childSnapshot.val().minAway; 
+
+    var $row = $('<tr></tr>').appendTo('#all-display');
+    
     $("<td></td>").appendTo($row).text(trainName);
     $("<td></td>").appendTo($row).text(destination);
-    $("<td></td>").appendTo($row).text(firstTrain);
+    $("<td></td>").appendTo($row).text(freq);
     // $("<td></td>").appendTo($row).text(freq);
 
 
@@ -93,6 +106,7 @@ firebase.initializeApp(config);
 
   $("<td></td>").appendTo($row).text(getTrain);
   $("<td></td>").appendTo($row).text(minTill);
+  
 
 }, function(errorObject) {
   console.log("Errors handled: " + errorObject.code);
